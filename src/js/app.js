@@ -6,7 +6,13 @@ const app = new Vue({
 
     data: {
         colorInput: '',
-        activeOutputTab: 'tailwind',
+        activeOutputTab: null,
+    },
+
+    mounted() {
+        this.activeOutputTab = localStorage.getItem('activeOutputTab')
+            ? localStorage.getItem('activeOutputTab')
+            : 'tailwind';
     },
 
     computed: {
@@ -86,6 +92,11 @@ const app = new Vue({
     },
 
     methods: {
+        setActiveOutputTab(tab) {
+            this.activeOutputTab = tab;
+            localStorage.setItem('activeOutputTab', tab);
+        },
+
         getRandomColor() {
             return chroma.random();
         },
