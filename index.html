@@ -11,46 +11,89 @@
 <body>
 
 <div id="app" class="py-12">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-normal leading-tight text-center mb-12 mx-3">Color Scheme Generator</h1>
+    <h1 class="text-3xl sm:text-4xl md:text-5xl font-normal leading-tight text-center mb-12 mx-3">
+        Color Scheme Generator
+    </h1>
 
     <label class="block max-w-sm mx-auto mb-12 px-3">
         <span class="flex items-center justify-between ml-4 text-xl">
             <span>Brand Color</span>
-            <span @click.prevent="colorInput = getRandomColor()" class="text-xs leading-none select-none cursor-pointer">Randomize</span>
+
+            <span
+                @click.prevent="colorInput = getRandomColor()"
+                class="text-xs leading-none select-none cursor-pointer">
+                    Randomize
+            </span>
         </span>
 
-        <input type="text" autofocus v-model="colorInput" :placeholder="brand" class="block w-full h-12 px-4 font-mono leading-tight text-green-darkest bg-white text-2xl shadow rounded outline-none">
+        <input type="text"
+            autofocus
+            class="block w-full h-12 px-4 font-mono leading-tight text-green-darkest
+                    bg-white text-2xl shadow rounded outline-none"
+            :placeholder="brand"
+            v-model="colorInput">
     </label>
 
-    <section class="container mx-auto mb-12 px-3">
+    <section class="container mb-12">
         <div class="flex flex-wrap md:flex-no-wrap items-start justify-between -mx-6">
 
             <div v-for="color in colors" class="w-1/2 sm:w-1/3 md:1/6 p-6">
                 <span v-text="color.name" class="ml-4"></span>
 
                 <div class="flex flex-col h-40 bg-grey-light rounded shadow overflow-hidden">
-                    <span :style="{ backgroundColor: tint(color.value).hex() }" class="h-1/5"></span>
+                    <span :style="{ backgroundColor: tint(color.value.hex()).hex() }" class="h-1/5"></span>
                     <span :style="{ backgroundColor: color.value.hex() }" class="flex-1"></span>
-                    <span :style="{ backgroundColor: shade(color.value).hex() }" class="h-1/5"></span>
+                    <span :style="{ backgroundColor: shade(color.value.hex()).hex() }" class="h-1/5"></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="container mx-auto mb-12 px-3">
+    <section class="container mb-12">
         <span class="ml-4">Greys</span>
 
         <div class="flex items-center justify-center rounded shadow overflow-hidden">
-            <div v-for="grey in greys" :style="{ backgroundColor: grey.value.hex() }" class="flex-1 h-40 bg-grey-light"></div>
+            <div
+                v-for="grey in greys"
+                :style="{ backgroundColor: grey.value.hex() }"
+                class="flex-1 h-40 bg-grey-light">
+            </div>
         </div>
     </section>
 
-    <section class="container mx-auto px-3">
+    <section class="container">
         <div class="flex flex-wrap">
-            <a href="#tailwind" @click.prevent="activeOutputTab = 'tailwind'" :class="{ 'bg-white': activeOutputTab === 'tailwind' }" class="text-sm sm:text-base text-grey-darkest rounded-t py-1 sm:py-2 px-2 sm:px-4 ml-2 mr-2 no-underline">Tailwind</a>
-            <a href="#sass" @click.prevent="activeOutputTab = 'sass'" :class="{ 'bg-white': activeOutputTab === 'sass' }" class="text-sm sm:text-base text-grey-darkest rounded-t py-1 sm:py-2 px-2 sm:px-4 mr-2 no-underline">SASS</a>
-            <a href="#scss" @click.prevent="activeOutputTab = 'scss'" :class="{ 'bg-white': activeOutputTab === 'scss' }" class="text-sm sm:text-base text-grey-darkest rounded-t py-1 sm:py-2 px-2 sm:px-4 mr-2 no-underline">SCSS</a>
-            <a href="#less" @click.prevent="activeOutputTab = 'less'" :class="{ 'bg-white': activeOutputTab === 'less' }" class="text-sm sm:text-base text-grey-darkest rounded-t py-1 sm:py-2 px-2 sm:px-4 mr-2 no-underline">Less</a>
+            <a href="#tailwind"
+                @click.prevent="activeOutputTab = 'tailwind'"
+                :class="{ 'bg-white': activeOutputTab === 'tailwind' }"
+                class="text-sm sm:text-base text-grey-darkest rounded-t py-1
+                        sm:py-2 px-2 sm:px-4 ml-2 mr-2 no-underline">
+                    Tailwind
+            </a>
+
+            <a href="#sass"
+                @click.prevent="activeOutputTab = 'sass'"
+                :class="{ 'bg-white': activeOutputTab === 'sass' }"
+                class="text-sm sm:text-base text-grey-darkest rounded-t py-1
+                        sm:py-2 px-2 sm:px-4 mr-2 no-underline">
+                    SASS
+            </a>
+
+            <a href="#scss"
+                @click.prevent="activeOutputTab = 'scss'"
+                :class="{ 'bg-white': activeOutputTab === 'scss' }"
+                class="text-sm sm:text-base text-grey-darkest rounded-t py-1
+                        sm:py-2 px-2 sm:px-4 mr-2 no-underline">
+                    SCSS
+            </a>
+
+            <a href="#less"
+                @click.prevent="activeOutputTab = 'less'"
+                :class="{ 'bg-white': activeOutputTab === 'less' }"
+                class="text-sm sm:text-base text-grey-darkest rounded-t py-1
+                        sm:py-2 px-2 sm:px-4 mr-2 no-underline">
+                    Less
+            </a>
         </div>
 
         <div id="output" class="shadow rounded bg-white p-8 pb-4 mb-12 leading-tight">
@@ -103,8 +146,8 @@
     <footer class="text-center text-sm text-grey-dark px-3">
         Created by
         <a href="https://github.com/adevade" class="text-grey-dark">@adevade</a>
-         | Got a suggestion? Feel free to
-         <a href="https://github.com/adevade/color-scheme-generator" class="text-grey-dark">contribute</a>!
+        | Got a suggestion? Feel free to
+        <a href="https://github.com/adevade/color-scheme-generator" class="text-grey-dark">contribute</a>!
     </footer>
 </div>
 

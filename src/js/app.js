@@ -90,12 +90,12 @@ const app = new Vue({
             return chroma.random();
         },
 
-        tint(color) {
-            return color.desaturate(.5).brighten(1);
+        tint(hex) {
+            return chroma.mix('#fff', hex, .25, 'lab');
         },
 
-        shade(color) {
-            return color.saturate(.5).darken(1);
+        shade(hex) {
+            return chroma.mix('#000', hex, .66, 'lab');
         },
     },
 });
