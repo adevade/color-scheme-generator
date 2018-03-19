@@ -29,9 +29,9 @@
                 <span v-text="color.name" class="ml-4"></span>
 
                 <div class="flex flex-col h-40 bg-grey-light rounded shadow overflow-hidden">
-                    <span :style="{ backgroundColor: tint(color.value).hex() }" class="h-1/5"></span>
+                    <span :style="{ backgroundColor: tint(color.value.hex()).hex() }" class="h-1/5"></span>
                     <span :style="{ backgroundColor: color.value.hex() }" class="flex-1"></span>
-                    <span :style="{ backgroundColor: shade(color.value).hex() }" class="h-1/5"></span>
+                    <span :style="{ backgroundColor: shade(color.value.hex()).hex() }" class="h-1/5"></span>
                 </div>
             </div>
         </div>
