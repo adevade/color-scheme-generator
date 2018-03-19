@@ -4,5 +4,6 @@
 
 @import "tailwindcss/components";
 
-@import "utilities/outline";
 @import "tailwindcss/utilities";
+
+@import "utilities/outlines";
