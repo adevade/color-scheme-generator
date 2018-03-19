@@ -22,7 +22,7 @@
         <input type="text" autofocus v-model="colorInput" :placeholder="brand" class="block w-full h-12 px-4 font-mono leading-tight text-green-darkest bg-white text-2xl shadow rounded outline-none">
     </label>
 
-    <section class="container mx-auto mb-12 px-3">
+    <section class="container mb-12">
         <div class="flex flex-wrap md:flex-no-wrap items-start justify-between -mx-6">
 
             <div v-for="color in colors" class="w-1/2 sm:w-1/3 md:1/6 p-6">
@@ -37,7 +37,7 @@
         </div>
     </section>
 
-    <section class="container mx-auto mb-12 px-3">
+    <section class="container mb-12">
         <span class="ml-4">Greys</span>
 
         <div class="flex items-center justify-center rounded shadow overflow-hidden">
@@ -45,7 +45,7 @@
         </div>
     </section>
 
-    <section class="container mx-auto px-3">
+    <section class="container">
         <div class="flex flex-wrap">
             <a href="#tailwind" @click.prevent="activeOutputTab = 'tailwind'" :class="{ 'bg-white': activeOutputTab === 'tailwind' }" class="text-sm sm:text-base text-grey-darkest rounded-t py-1 sm:py-2 px-2 sm:px-4 ml-2 mr-2 no-underline">Tailwind</a>
             <a href="#sass" @click.prevent="activeOutputTab = 'sass'" :class="{ 'bg-white': activeOutputTab === 'sass' }" class="text-sm sm:text-base text-grey-darkest rounded-t py-1 sm:py-2 px-2 sm:px-4 mr-2 no-underline">SASS</a>
