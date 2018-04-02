@@ -61,31 +61,31 @@ const app = new Vue({
                 },
                 'grey-lighter': {
                     name: 'Grey Lighter',
-                    value: chroma.mix('#e7e7e7', this.brand, .01, 'lab'),
+                    value: chroma.mix('#e6e6e6', this.brand, .01, 'lab'),
                 },
                 'grey-light': {
                     name: 'Grey Light',
-                    value: chroma.mix('#d3d3d3', this.brand, .02, 'lab'),
+                    value: chroma.mix('#d2d2d2', this.brand, .01, 'lab'),
                 },
                 'grey': {
                     name: 'Grey',
-                    value: chroma.mix('#c0c0c0', this.brand, .02, 'lab'),
+                    value: chroma.mix('#bfbfbf', this.brand, .01, 'lab'),
                 },
                 'grey-dark': {
                     name: 'Grey Dark',
-                    value: chroma.mix('#9a9a9a', this.brand, .03, 'lab'),
+                    value: chroma.mix('#979797', this.brand, .01, 'lab'),
                 },
                 'grey-darker': {
                     name: 'Grey Darker',
-                    value: chroma.mix('#737373', this.brand, .03, 'lab'),
+                    value: chroma.mix('#6f6f6f', this.brand, .01, 'lab'),
                 },
                 'grey-darkest': {
                     name: 'Grey Darkest',
-                    value: chroma.mix('#4d4d4d', this.brand, .04, 'lab'),
+                    value: chroma.mix('#484848', this.brand, .01, 'lab'),
                 },
                 'black': {
                     name: 'Black',
-                    value: chroma.mix('#262626', this.brand, .05, 'lab'),
+                    value: chroma.mix('#202020', this.brand, .01, 'lab'),
                 },
             };
         },

@@ -1,7 +1,5 @@
 <h1 align="center">Color Scheme Generator</h1>
 
-<h3 align="center">When you just need some UI colors, fast.</h3>
-
 ![Generated Colors](https://raw.githubusercontent.com/adevade/color-scheme-generator/develop/dist/generated-colors.png)
 
 ## Usage

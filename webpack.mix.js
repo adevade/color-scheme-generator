@@ -1,6 +1,4 @@
 let mix = require('laravel-mix');
-let tailwind = require('tailwindcss');
-let postCssImport = require('postcss-import');
 require('laravel-mix-purgecss');
 
 mix.setPublicPath('dist/')
@@ -13,7 +11,6 @@ mix.setPublicPath('dist/')
     })
     .options({
         postCss: [
-            postCssImport(),
-            tailwind('tailwind.js'),
+            require('tailwindcss')('tailwind.js'),
         ]
     });

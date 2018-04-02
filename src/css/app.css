@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-@import "tailwindcss/preflight";
-
-@import "tailwindcss/components";
-
-@import "tailwindcss/utilities";
-
-@import "utilities/outlines";
+@tailwind preflight;
+@tailwind components;
+@tailwind utilities;
