@@ -106,7 +106,7 @@ const app = new Vue({
         },
 
         shade(hex) {
-            return chroma.mix('#000', hex, .66, 'lab');
+            return chroma.mix('#000', hex, .5, 'lab');
         },
     },
 });
