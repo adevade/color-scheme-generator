@@ -929,9 +929,9 @@ module.exports = {
   */
 
   plugins: [
-    require('./node_modules/tailwindcss/plugins/container')({
+    require('tailwindcss/plugins/container')({
       center: true,
-      padding: '0.75rem',
+      padding: '1rem',
     }),
   ],
 
