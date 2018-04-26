@@ -46,15 +46,15 @@ View the full documentation at https://tailwindcss.com.
 let colors = {
   'transparent': 'transparent',
 
+  'black': '#22292f',
+  'grey-darkest': '#3d4852',
+  'grey-darker': '#606f7b',
+  'grey-dark': '#8795a1',
+  'grey': '#b8c2cc',
+  'grey-light': '#dae1e7',
+  'grey-lighter': '#f1f5f8',
+  'grey-lightest': '#f8fafc',
   'white': '#ffffff',
-  'grey-lightest': '#f9f9f9',
-  'grey-lighter': '#e5e5e5',
-  'grey-light': '#d1d1d1',
-  'grey': '#bebebe',
-  'grey-dark': '#979797',
-  'grey-darker': '#6f6f6f',
-  'grey-darkest': '#494949',
-  'black': '#212121',
 
   // 'red-darkest': '#3b0d0c',
   // 'red-darker': '#621b18',
@@ -278,7 +278,15 @@ module.exports = {
   */
 
   fontWeights: {
+    'hairline': 100,
+    'thin': 200,
+    'light': 300,
     'normal': 400,
+    'medium': 500,
+    'semibold': 600,
+    'bold': 700,
+    'extrabold': 800,
+    'black': 900,
   },
 
 
@@ -754,7 +762,7 @@ module.exports = {
   */
 
   shadows: {
-    default: '1px 1px 1px 0 rgba(0,0,0,0.10), 0 0 4px 0 rgba(0,0,0,0.05)',
+    default: '0 2px 4px 0 rgba(0,0,0,0.10)',
     'md': '0 4px 8px 0 rgba(0,0,0,0.12), 0 2px 4px 0 rgba(0,0,0,0.08)',
     'lg': '0 15px 30px 0 rgba(0,0,0,0.11), 0 5px 15px 0 rgba(0,0,0,0.08)',
     'inner': 'inset 0 2px 4px 0 rgba(0,0,0,0.06)',
@@ -929,9 +937,9 @@ module.exports = {
   */
 
   plugins: [
-    require('./node_modules/tailwindcss/plugins/container')({
-      center: true,
-      padding: '0.75rem',
+    require('tailwindcss/plugins/container')({
+      // center: true,
+      // padding: '1rem',
     }),
   ],
 

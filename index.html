@@ -1,46 +1,51 @@
 <!doctype html>
-<html lang="en" class="bg-grey-lightest text-grey-darkest leading-normal font-normal font-mono text-base">
+<html lang="en" class="bg-grey-lighter font-mono font-normal leading-normal text-base text-grey-darkest">
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta http-equiv="x-ua-compatible" content="ie=edge">
     <title>Color Scheme Generator</title>
+    <script defer src="https://use.fontawesome.com/releases/v5.0.10/js/all.js" integrity="sha384-slN8GvtUJGnv6ca26v8EzVaR9DC58QEwsIk9q1QXdCU8Yu8ck/tL/5szYlBbqmS+" crossorigin="anonymous"></script>
+    <script defer src="dist/app.js"></script>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Space+Mono">
     <link rel="stylesheet" href="dist/app.css">
 </head>
 <body>
 
 <div id="app" class="py-12">
-    <h1 class="text-3xl sm:text-4xl md:text-5xl font-normal leading-tight text-center mb-12 mx-3">
+    <h1 class="mb-12 px-4 font-normal leading-tight text-center text-4xl">
         Color Scheme Generator
     </h1>
 
-    <label class="block max-w-sm mx-auto mb-12 px-3">
-        <span class="flex items-center justify-between ml-4 text-xl">
-            <span>Brand Color</span>
-
-            <span
-                @click.prevent="colorInput = getRandomColor()"
-                class="text-xs leading-none select-none cursor-pointer">
-                    Randomize
-            </span>
+    <label class="block max-w-sm mx-auto mb-12 px-4">
+        <span class="ml-4 text-lg">
+            Brand Color
         </span>
 
-        <input type="text"
-            autofocus
-            class="block w-full h-12 px-4 font-mono leading-tight text-green-darkest
-                    bg-white text-2xl shadow rounded outline-none"
-            :placeholder="brand"
-            v-model="colorInput">
+        <div class="flex">
+            <input type="text"
+                autofocus
+                class="py-2 px-4 w-full rounded-l bg-white font-mono leading-normal text-grey-darkest text-2xl"
+                placeholder="#bada55, rgb(), blue"
+                v-model="colorInput"
+            >
+
+            <button type="button"
+                class="px-4 rounded-r bg-grey-light"
+                @click="colorInput = getRandomColor()"
+            >
+                <i class="fas fa-random text-grey-darker"></i>
+            </button>
+        </div>
     </label>
 
-    <section class="container mb-12">
-        <div class="flex flex-wrap md:flex-no-wrap items-start justify-between -mx-6">
+    <section class="container mx-auto mb-12 px-4">
+        <div class="flex flex-wrap items-start justify-between -mx-4 md:flex-no-wrap">
 
-            <div v-for="color in colors" class="w-1/2 sm:w-1/3 md:1/6 p-6">
+            <div v-for="color in colors" class="w-1/2 sm:w-1/3 md:1/6 p-4">
                 <span v-text="color.name" class="ml-4"></span>
 
-                <div class="flex flex-col h-40 bg-grey-light rounded shadow overflow-hidden">
+                <div class="flex flex-col h-32 rounded overflow-hidden">
                     <span :style="{ backgroundColor: tint(color.value.hex()).hex() }" class="h-1/5"></span>
                     <span :style="{ backgroundColor: color.value.hex() }" class="flex-1"></span>
                     <span :style="{ backgroundColor: shade(color.value.hex()).hex() }" class="h-1/5"></span>
@@ -49,54 +54,58 @@
         </div>
     </section>
 
-    <section class="container mb-12">
+    <section class="container mx-auto mb-12 px-4">
         <span class="ml-4">Greys</span>
 
-        <div class="flex items-center justify-center rounded shadow overflow-hidden">
+        <div class="flex flex-wrap items-center justify-center rounded overflow-hidden md:flex-no-wrap">
             <div
                 v-for="grey in greys"
                 :style="{ backgroundColor: grey.value.hex() }"
-                class="flex-1 h-40 bg-grey-light">
+                class="w-1/3 h-32 md:flex-1">
             </div>
         </div>
     </section>
 
-    <section class="container">
+    <section class="container mx-auto mb-12 px-4">
         <div class="flex flex-wrap">
-            <a href="#tailwind"
-                @click.prevent="setActiveOutputTab('tailwind')"
+            <span
+                class="py-1 px-2 mr-2 rounded-t no-underline text-grey-darkest text-sm cursor-pointer sm:py-2 sm:px-4 sm:text-base"
+                role="tab"
                 :class="{ 'bg-white': activeOutputTab === 'tailwind' }"
-                class="text-sm sm:text-base text-grey-darkest rounded-t py-1
-                        sm:py-2 px-2 sm:px-4 ml-2 mr-2 no-underline">
-                    Tailwind
-            </a>
+                @click.prevent="setActiveOutputTab('tailwind')"
+            >
+                Tailwind
+            </span>
 
-            <a href="#sass"
-                @click.prevent="setActiveOutputTab('sass')"
+            <span
+                class="py-1 px-2 mr-2 rounded-t no-underline text-grey-darkest text-sm cursor-pointer sm:py-2 sm:px-4 sm:text-base"
+                role="tab"
                 :class="{ 'bg-white': activeOutputTab === 'sass' }"
-                class="text-sm sm:text-base text-grey-darkest rounded-t py-1
-                        sm:py-2 px-2 sm:px-4 mr-2 no-underline">
-                    SASS
-            </a>
+                @click.prevent="setActiveOutputTab('sass')"
+            >
+                SASS
+            </span>
 
-            <a href="#scss"
-                @click.prevent="setActiveOutputTab('scss')"
+            <span
+                class="py-1 px-2 mr-2 rounded-t no-underline text-grey-darkest text-sm cursor-pointer sm:py-2 sm:px-4 sm:text-base"
+                role="tab"
                 :class="{ 'bg-white': activeOutputTab === 'scss' }"
-                class="text-sm sm:text-base text-grey-darkest rounded-t py-1
-                        sm:py-2 px-2 sm:px-4 mr-2 no-underline">
-                    SCSS
-            </a>
+                @click.prevent="setActiveOutputTab('scss')"
+            >
+                SCSS
+            </span>
 
-            <a href="#less"
-                @click.prevent="setActiveOutputTab('less')"
+            <span
+                class="py-1 px-2 mr-2 rounded-t no-underline text-grey-darkest text-sm cursor-pointer sm:py-2 sm:px-4 sm:text-base"
+                role="tab"
                 :class="{ 'bg-white': activeOutputTab === 'less' }"
-                class="text-sm sm:text-base text-grey-darkest rounded-t py-1
-                        sm:py-2 px-2 sm:px-4 mr-2 no-underline">
-                    Less
-            </a>
+                @click.prevent="setActiveOutputTab('less')"
+            >
+                Less
+            </span>
         </div>
 
-        <div id="output" class="shadow rounded bg-white p-8 pb-4 mb-12 leading-tight">
+        <div id="output" class="rounded-b rounded-tr bg-white p-8 pb-4 leading-tight" :class="{ 'rounded-t': activeOutputTab !== 'tailwind' }">
             <!-- TAILWIND -->
             <div v-if="activeOutputTab === 'tailwind'" class="overflow-x-scroll">
                 <span v-for="(grey, id) in greys" class="whitespace-no-wrap">'{{ id }}': '{{ grey.value.hex() }}',<br></span><br>
@@ -145,12 +154,11 @@
 
     <footer class="text-center text-sm text-grey-dark px-3">
         Created by
-        <a href="https://github.com/adevade" class="text-grey-dark">@adevade</a>
+        <a href="https://twitter.com/adevade" class="text-grey-dark">@adevade</a>
         | Got a suggestion? Feel free to
         <a href="https://github.com/adevade/color-scheme-generator" class="text-grey-dark">contribute</a>!
     </footer>
 </div>
 
-<script src="dist/app.js"></script>
 </body>
 </html>

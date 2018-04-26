@@ -1,23 +1,25 @@
-import Vue from "vue";
-import chroma from "chroma-js";
+import Vue from 'vue';
+import chroma from 'chroma-js';
 
-const app = new Vue({
+new Vue({
     el: '#app',
+
+    created() {
+        this.activeOutputTab = localStorage.getItem('activeOutputTab')
+            ? localStorage.getItem('activeOutputTab')
+            : 'tailwind';
+    },
 
     data: {
         colorInput: '',
         activeOutputTab: null,
     },
 
-    mounted() {
-        this.activeOutputTab = localStorage.getItem('activeOutputTab')
-            ? localStorage.getItem('activeOutputTab')
-            : 'tailwind';
-    },
-
     computed: {
         brand() {
-            return (!! this.colorInput) ? chroma(this.colorInput) : this.getRandomColor();
+            return (!! this.colorInput)
+                ? chroma(this.colorInput)
+                : this.getRandomColor();
         },
 
         colors() {
