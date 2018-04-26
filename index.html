@@ -105,7 +105,7 @@
             </span>
         </div>
 
-        <div id="output" class="rounded-b rounded-tr bg-white p-8 pb-4 leading-tight" :class="{ 'rounded-t': activeOutputTab !== 'tailwind' }">
+        <div id="output" class="rounded-b rounded-tr bg-white pt-8 px-4 pb-4 leading-tight text-sm" :class="{ 'rounded-t': activeOutputTab !== 'tailwind' }">
             <!-- TAILWIND -->
             <div v-if="activeOutputTab === 'tailwind'" class="overflow-x-scroll">
                 <span v-for="(grey, id) in greys" class="whitespace-no-wrap">'{{ id }}': '{{ grey.value.hex() }}',<br></span><br>
