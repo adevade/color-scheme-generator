@@ -1,6 +1,6 @@
 <h1 align="center">Color Scheme Generator</h1>
 
-![Generated Colors](https://raw.githubusercontent.com/adevade/color-scheme-generator/develop/dist/screenshot.png)
+![Generated Colors](https://user-images.githubusercontent.com/1066486/51286430-406ad000-19f3-11e9-9f71-6a7e1862e50c.png)
 
 ## Usage
 Enter a `brand color`, or randomly generate one, and the rest of the colors will match. The greys also subtly tints with your `brand color`.
