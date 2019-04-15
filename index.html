@@ -7,108 +7,80 @@
     <title>Color Scheme Generator</title>
     <script defer src="https://use.fontawesome.com/releases/v5.8.1/js/all.js" integrity="sha384-g5uSoOSBd7KkhAMlnQILrecXvzst9TdC09/VM+pjDTCM+1il8RHz5fKANTFFb+gQ" crossorigin="anonymous"></script>
     <script defer src="/dist/app.js"></script>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Space+Mono">
     <link rel="stylesheet" href="/dist/app.css">
 </head>
 <body>
 
-<div id="app" class="py-12">
-    <h1 class="mb-12 px-4 font-normal leading-tight text-center text-4xl">
+<div id="app">
+    <h1 class="leading-tight my-12 px-4 text-4xl text-center">
         Color Scheme Generator
     </h1>
 
-    <label class="block max-w-sm mx-auto mb-12 px-4">
-        <span class="ml-4 text-lg">
-            Brand Color
-        </span>
+    <label class="block max-w-lg mx-auto mb-12 px-4">
+        <span class="text-lg">Brand Color</span>
 
         <div class="flex">
             <input type="text"
+                autocomplete="off"
                 autofocus
-                class="py-2 px-4 w-full rounded-l bg-white font-mono leading-normal text-grey-darkest text-2xl"
-                placeholder="#bada55, rgb(), blue"
-                v-model="colorInput"
+                class="flex-1 px-4 py-2 rounded-l text-2xl"
+                :placeholder="brand"
+                v-model="colorInputValue"
             >
 
             <button type="button"
-                class="px-4 rounded-r bg-grey-light"
-                @click="colorInput = getRandomColor()"
+                class="bg-gray-100 px-5 rounded-r"
+                title="Randomize"
+                @click="colorInputValue = getRandomColor()"
             >
-                <i class="fas fa-random text-grey-darker"></i>
+                <i class="fas fa-random"></i>
             </button>
         </div>
     </label>
 
-    <section class="container mx-auto mb-12 px-4">
-        <div class="flex flex-wrap items-start justify-between -mx-4 md:flex-no-wrap">
+    <section class="container mb-12">
+        <div class="-mx-4 flex flex-wrap items-start justify-between md:flex-no-wrap">
 
-            <div v-for="color in colors" class="w-1/2 sm:w-1/3 md:1/6 p-4">
-                <span v-text="color.name" class="ml-4"></span>
+            <div v-for="color in colors" class="md:1/6 p-4 sm:w-1/3 w-1/2">
+                <span v-text="color.name"></span>
 
-                <div class="flex flex-col h-32 rounded overflow-hidden">
-                    <span :style="{ backgroundColor: tint(color.value.hex()).hex() }" class="h-1/5"></span>
+                <div class="flex flex-col h-32 overflow-hidden rounded">
+                    <span :style="{ backgroundColor: tint(color.value.hex()).hex() }" class="h-6"></span>
                     <span :style="{ backgroundColor: color.value.hex() }" class="flex-1"></span>
-                    <span :style="{ backgroundColor: shade(color.value.hex()).hex() }" class="h-1/5"></span>
+                    <span :style="{ backgroundColor: shade(color.value.hex()).hex() }" class="h-6"></span>
                 </div>
             </div>
         </div>
     </section>
 
-    <section class="container mx-auto mb-12 px-4">
-        <span class="ml-4">Greys</span>
+    <section class="container mb-12">
+        <span>Grays</span>
 
-        <div class="flex flex-wrap items-center justify-center rounded overflow-hidden md:flex-no-wrap">
+        <div class="flex flex-wrap items-center justify-center md:flex-no-wrap overflow-hidden rounded">
             <div
-                v-for="grey in greys"
-                :style="{ backgroundColor: grey.value.hex() }"
+                v-for="gray in grays"
+                :style="{ backgroundColor: gray.value.hex() }"
                 class="w-1/3 h-32 md:flex-1">
             </div>
         </div>
     </section>
 
-    <section class="container mx-auto mb-12 px-4">
+    <section class="container mb-12">
         <div class="flex flex-wrap">
             <span
-                class="py-1 px-2 mr-2 rounded-t no-underline text-grey-darkest text-sm cursor-pointer sm:py-2 sm:px-4 sm:text-base"
+                v-for="tab in tabs"
+                class="cursor-pointer mr-2 px-2 py-1 rounded-t sm:px-4 sm:py-2 sm:text-base text-sm"
                 role="tab"
-                :class="{ 'bg-white': activeOutputTab === 'tailwind' }"
-                @click.prevent="setActiveOutputTab('tailwind')"
-            >
-                Tailwind
-            </span>
-
-            <span
-                class="py-1 px-2 mr-2 rounded-t no-underline text-grey-darkest text-sm cursor-pointer sm:py-2 sm:px-4 sm:text-base"
-                role="tab"
-                :class="{ 'bg-white': activeOutputTab === 'sass' }"
-                @click.prevent="setActiveOutputTab('sass')"
-            >
-                SASS
-            </span>
-
-            <span
-                class="py-1 px-2 mr-2 rounded-t no-underline text-grey-darkest text-sm cursor-pointer sm:py-2 sm:px-4 sm:text-base"
-                role="tab"
-                :class="{ 'bg-white': activeOutputTab === 'scss' }"
-                @click.prevent="setActiveOutputTab('scss')"
-            >
-                SCSS
-            </span>
-
-            <span
-                class="py-1 px-2 mr-2 rounded-t no-underline text-grey-darkest text-sm cursor-pointer sm:py-2 sm:px-4 sm:text-base"
-                role="tab"
-                :class="{ 'bg-white': activeOutputTab === 'less' }"
-                @click.prevent="setActiveOutputTab('less')"
-            >
-                Less
-            </span>
+                :class="{ 'bg-white': activeTab === tab.id }"
+                @click="setActiveTab(tab.id)"
+                v-text="tab.title"
+            ></span>
         </div>
 
-        <div id="output" class="rounded-b rounded-tr bg-white pt-8 px-4 pb-4 leading-tight text-sm" :class="{ 'rounded-t': activeOutputTab !== 'tailwind' }">
+        <div id="output" class="rounded-b rounded-tr bg-white pt-8 px-4 pb-4 leading-tight text-sm" :class="{ 'rounded-t': activeTab !== 'tailwind' }">
             <!-- TAILWIND -->
-            <div v-if="activeOutputTab === 'tailwind'" class="overflow-x-scroll">
-                <span v-for="(grey, id) in greys" class="whitespace-no-wrap">'{{ id }}': '{{ grey.value.hex() }}',<br></span><br>
+            <div v-if="activeTab === 'tailwind'" class="overflow-x-scroll">
+                <span v-for="(gray, id) in grays" class="whitespace-no-wrap">'{{ id }}': '{{ gray.value.hex() }}',<br></span><br>
 
                 <span v-for="(color, id) in colors" class="whitespace-no-wrap">
                     '{{ id }}-light': '{{ tint(color.value).hex() }}',<br>
@@ -118,8 +90,8 @@
             </div>
 
             <!-- SASS -->
-            <div v-if="activeOutputTab === 'sass'" class="overflow-x-scroll">
-                <span v-for="(grey, id) in greys" class="whitespace-no-wrap">${{ id }}: {{ grey.value.hex() }}<br></span><br>
+            <div v-if="activeTab === 'sass'" class="overflow-x-scroll">
+                <span v-for="(gray, id) in grays" class="whitespace-no-wrap">${{ id }}: {{ gray.value.hex() }}<br></span><br>
 
                 <span v-for="(color, id) in colors" class="whitespace-no-wrap">
                     ${{ id }}-light: {{ tint(color.value).hex() }}<br>
@@ -129,8 +101,8 @@
             </div>
 
             <!-- SCSS -->
-            <div v-if="activeOutputTab === 'scss'" class="overflow-x-scroll">
-                <span v-for="(grey, id) in greys" class="whitespace-no-wrap">${{ id }}: {{ grey.value.hex() }};<br></span><br>
+            <div v-if="activeTab === 'scss'" class="overflow-x-scroll">
+                <span v-for="(gray, id) in grays" class="whitespace-no-wrap">${{ id }}: {{ gray.value.hex() }};<br></span><br>
 
                 <span v-for="(color, id) in colors" class="whitespace-no-wrap">
                     ${{ id }}-light: {{ tint(color.value).hex() }};<br>
@@ -140,8 +112,8 @@
             </div>
 
             <!-- LESS -->
-            <div v-if="activeOutputTab === 'less'" class="overflow-x-scroll">
-                <span v-for="(grey, id) in greys" class="whitespace-no-wrap">@{{ id }}: {{ grey.value.hex() }};<br></span><br>
+            <div v-if="activeTab === 'less'" class="overflow-x-scroll">
+                <span v-for="(gray, id) in grays" class="whitespace-no-wrap">@{{ id }}: {{ gray.value.hex() }};<br></span><br>
 
                 <span v-for="(color, id) in colors" class="whitespace-no-wrap">
                     @{{ id }}-light: {{ tint(color.value).hex() }};<br>
@@ -152,11 +124,11 @@
         </div>
     </section>
 
-    <footer class="text-center text-sm text-grey-dark px-3">
+    <footer class="mb-12 px-3 text-center text-gray-600 text-sm">
         Created by
-        <a href="https://twitter.com/adevade" class="text-grey-dark">@adevade</a>
-        | Got a suggestion? Feel free to
-        <a href="https://github.com/adevade/color-scheme-generator" class="text-grey-dark">contribute</a>!
+        <a href="https://twitter.com/adevade" class="underline">@adevade</a>
+        | Got suggestions? Feel free to
+        <a href="https://github.com/adevade/color-scheme-generator" class="underline">contribute in GitHub</a>!
     </footer>
 </div>
 
