@@ -1,5 +1,3 @@
-@charset "utf-8";
-
-@tailwind preflight;
+@tailwind base;
 @tailwind components;
 @tailwind utilities;

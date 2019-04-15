@@ -5,21 +5,39 @@ new Vue({
     el: '#app',
 
     created() {
-        this.activeOutputTab = localStorage.getItem('activeOutputTab')
-            ? localStorage.getItem('activeOutputTab')
+        this.activeTab = localStorage.getItem('activeTab')
+            ? localStorage.getItem('activeTab')
             : 'tailwind';
     },
 
     data: {
-        colorInput: '',
-        activeOutputTab: null,
+        activeTab: null,
+        colorInputValue: '',
+        tabs: [
+            {
+                id: 'tailwind',
+                title: 'Tailwind',
+            },
+            {
+                id: 'sass',
+                title: 'SASS',
+            },
+            {
+                id: 'scss',
+                title: 'SCSS',
+            },
+            {
+                id: 'less',
+                title: 'Less',
+            },
+        ],
     },
 
     computed: {
         brand() {
-            return (!! this.colorInput)
-                ? chroma(this.colorInput)
-                : this.getRandomColor();
+            return ! this.colorInputValue
+                ? this.getRandomColor()
+                : chroma(this.colorInputValue);
         },
 
         colors() {
@@ -51,38 +69,38 @@ new Vue({
             };
         },
 
-        greys() {
+        grays() {
             return {
                 'white': {
                     name: 'White',
                     value: chroma('#fff'),
                 },
-                'grey-lightest': {
-                    name: 'Grey Lightest',
+                'gray-lightest': {
+                    name: 'gray Lightest',
                     value: chroma.mix('#fafafa', this.brand, .01, 'lab'),
                 },
-                'grey-lighter': {
-                    name: 'Grey Lighter',
+                'gray-lighter': {
+                    name: 'gray Lighter',
                     value: chroma.mix('#e6e6e6', this.brand, .01, 'lab'),
                 },
-                'grey-light': {
-                    name: 'Grey Light',
+                'gray-light': {
+                    name: 'gray Light',
                     value: chroma.mix('#d2d2d2', this.brand, .01, 'lab'),
                 },
-                'grey': {
-                    name: 'Grey',
+                'gray': {
+                    name: 'gray',
                     value: chroma.mix('#bfbfbf', this.brand, .01, 'lab'),
                 },
-                'grey-dark': {
-                    name: 'Grey Dark',
+                'gray-dark': {
+                    name: 'gray Dark',
                     value: chroma.mix('#979797', this.brand, .01, 'lab'),
                 },
-                'grey-darker': {
-                    name: 'Grey Darker',
+                'gray-darker': {
+                    name: 'gray Darker',
                     value: chroma.mix('#6f6f6f', this.brand, .01, 'lab'),
                 },
-                'grey-darkest': {
-                    name: 'Grey Darkest',
+                'gray-darkest': {
+                    name: 'gray Darkest',
                     value: chroma.mix('#484848', this.brand, .01, 'lab'),
                 },
                 'black': {
@@ -94,9 +112,9 @@ new Vue({
     },
 
     methods: {
-        setActiveOutputTab(tab) {
-            this.activeOutputTab = tab;
-            localStorage.setItem('activeOutputTab', tab);
+        setActiveTab(tab) {
+            this.activeTab = tab;
+            localStorage.setItem('activeTab', tab);
         },
 
         getRandomColor() {
