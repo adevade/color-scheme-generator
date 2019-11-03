@@ -1,4 +1,4 @@
-<h1 style="text-align: center;">Color Scheme Generator</h1>
+# Color Scheme Generator
 
 ![Generated Colors](https://user-images.githubusercontent.com/1066486/56159605-6b020000-5fc5-11e9-951f-b0b631ebd57b.png)
 
