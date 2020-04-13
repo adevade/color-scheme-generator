@@ -1,135 +1,196 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en" class="bg-gray-200 font-mono text-gray-800">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Color Scheme Generator</title>
-    <script defer src="https://use.fontawesome.com/releases/v5.11.2/js/all.js"></script>
-    <script defer src="dist/app.js"></script>
-    <link rel="stylesheet" href="dist/app.css">
-</head>
-<body>
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>Color Scheme Generator</title>
+        <script
+            defer
+            src="https://use.fontawesome.com/releases/v5.11.2/js/all.js"
+        ></script>
+        <script defer src="dist/app.js"></script>
+        <link rel="stylesheet" href="dist/app.css" />
+    </head>
+    <body>
+        <div id="app">
+            <h1 class="leading-tight my-12 px-4 text-4xl text-center">
+                Color Scheme Generator
+            </h1>
 
-<div id="app">
-    <h1 class="leading-tight my-12 px-4 text-4xl text-center">
-        Color Scheme Generator
-    </h1>
+            <label class="block max-w-lg mx-auto mb-12 px-4">
+                <span class="text-lg">Brand Color</span>
 
-    <label class="block max-w-lg mx-auto mb-12 px-4">
-        <span class="text-lg">Brand Color</span>
+                <div class="flex">
+                    <input
+                        type="text"
+                        autocomplete="off"
+                        autofocus
+                        class="flex-1 px-4 py-2 rounded-l text-2xl"
+                        :placeholder="brand"
+                        v-model="colorInputValue"
+                    />
 
-        <div class="flex">
-            <input type="text"
-                autocomplete="off"
-                autofocus
-                class="flex-1 px-4 py-2 rounded-l text-2xl"
-                :placeholder="brand"
-                v-model="colorInputValue"
-            >
-
-            <button type="button"
-                class="bg-gray-100 px-5 rounded-r"
-                title="Randomize"
-                @click="colorInputValue = getRandomColor()"
-            >
-                <i class="fas fa-random"></i>
-            </button>
-        </div>
-    </label>
-
-    <section class="container mx-auto mb-12 px-4">
-        <div class="-mx-4 flex flex-wrap items-start justify-between md:flex-no-wrap">
-
-            <div v-for="color in colors" class="md:1/6 p-4 sm:w-1/3 w-1/2">
-                <span v-text="color.name"></span>
-
-                <div class="flex flex-col h-32 overflow-hidden rounded">
-                    <span :style="{ backgroundColor: tint(color.value.hex()).hex() }" class="h-6"></span>
-                    <span :style="{ backgroundColor: color.value.hex() }" class="flex-1"></span>
-                    <span :style="{ backgroundColor: shade(color.value.hex()).hex() }" class="h-6"></span>
+                    <button
+                        type="button"
+                        class="bg-gray-100 px-5 rounded-r"
+                        title="Randomize"
+                        @click="colorInputValue = getRandomColor()"
+                    >
+                        <i class="fas fa-random"></i>
+                    </button>
                 </div>
-            </div>
+            </label>
+
+            <section class="container mx-auto mb-12 px-4">
+                <div
+                    class="-mx-4 flex flex-wrap items-start justify-between md:flex-no-wrap"
+                >
+                    <div
+                        v-for="color in colors"
+                        class="md:1/6 p-4 sm:w-1/3 w-1/2"
+                    >
+                        <span v-text="color.name"></span>
+
+                        <div class="flex flex-col h-32 overflow-hidden rounded">
+                            <span
+                                :style="{ backgroundColor: tint(color.value.hex()).hex() }"
+                                class="h-6"
+                            ></span>
+                            <span
+                                :style="{ backgroundColor: color.value.hex() }"
+                                class="flex-1"
+                            ></span>
+                            <span
+                                :style="{ backgroundColor: shade(color.value.hex()).hex() }"
+                                class="h-6"
+                            ></span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section class="container mx-auto mb-12 px-4">
+                <span>Grays</span>
+
+                <div
+                    class="flex flex-wrap items-center justify-center md:flex-no-wrap overflow-hidden rounded"
+                >
+                    <div
+                        v-for="gray in grays"
+                        :style="{ backgroundColor: gray.value.hex() }"
+                        class="w-1/3 h-32 md:flex-1"
+                    ></div>
+                </div>
+            </section>
+
+            <section class="container mx-auto mb-12 px-4">
+                <div class="flex flex-wrap">
+                    <span
+                        v-for="tab in tabs"
+                        class="cursor-pointer mr-2 px-2 py-1 rounded-t sm:px-4 sm:py-2 sm:text-base text-sm"
+                        role="tab"
+                        :class="{ 'bg-white': activeTab === tab.id }"
+                        @click="setActiveTab(tab.id)"
+                        v-text="tab.title"
+                    ></span>
+                </div>
+
+                <div
+                    id="output"
+                    class="rounded-b rounded-tr bg-white pt-8 px-4 pb-4 leading-tight text-sm"
+                    :class="{ 'rounded-t': activeTab !== 'tailwind' }"
+                >
+                    <!-- TAILWIND -->
+                    <div
+                        v-if="activeTab === 'tailwind'"
+                        class="overflow-x-scroll"
+                    >
+                        <span
+                            v-for="(gray, id) in grays"
+                            class="whitespace-no-wrap"
+                            >'{{ id }}': '{{ gray.value.hex() }}',<br /></span
+                        ><br />
+
+                        <span
+                            v-for="(color, id) in colors"
+                            class="whitespace-no-wrap"
+                        >
+                            '{{ id }}-light': '{{ tint(color.value).hex()
+                            }}',<br />
+                            '{{ id }}': '{{ color.value.hex() }}',<br />
+                            '{{ id }}-dark': '{{ shade(color.value).hex()
+                            }}',<br /><br />
+                        </span>
+                    </div>
+
+                    <!-- SASS -->
+                    <div v-if="activeTab === 'sass'" class="overflow-x-scroll">
+                        <span
+                            v-for="(gray, id) in grays"
+                            class="whitespace-no-wrap"
+                            >${{ id }}: {{ gray.value.hex() }}<br /></span
+                        ><br />
+
+                        <span
+                            v-for="(color, id) in colors"
+                            class="whitespace-no-wrap"
+                        >
+                            ${{ id }}-light: {{ tint(color.value).hex() }}<br />
+                            ${{ id }}: {{ color.value.hex() }}<br />
+                            ${{ id }}-dark: {{ shade(color.value).hex() }}<br /><br />
+                        </span>
+                    </div>
+
+                    <!-- SCSS -->
+                    <div v-if="activeTab === 'scss'" class="overflow-x-scroll">
+                        <span
+                            v-for="(gray, id) in grays"
+                            class="whitespace-no-wrap"
+                            >${{ id }}: {{ gray.value.hex() }};<br /></span
+                        ><br />
+
+                        <span
+                            v-for="(color, id) in colors"
+                            class="whitespace-no-wrap"
+                        >
+                            ${{ id }}-light: {{ tint(color.value).hex() }};<br />
+                            ${{ id }}: {{ color.value.hex() }};<br />
+                            ${{ id }}-dark: {{ shade(color.value).hex() }};<br /><br />
+                        </span>
+                    </div>
+
+                    <!-- LESS -->
+                    <div v-if="activeTab === 'less'" class="overflow-x-scroll">
+                        <span
+                            v-for="(gray, id) in grays"
+                            class="whitespace-no-wrap"
+                            >@{{ id }}: {{ gray.value.hex() }};<br /></span
+                        ><br />
+
+                        <span
+                            v-for="(color, id) in colors"
+                            class="whitespace-no-wrap"
+                        >
+                            @{{ id }}-light: {{ tint(color.value).hex() }};<br />
+                            @{{ id }}: {{ color.value.hex() }};<br />
+                            @{{ id }}-dark: {{ shade(color.value).hex() }};<br /><br />
+                        </span>
+                    </div>
+                </div>
+            </section>
+
+            <footer class="mb-12 px-3 text-center text-gray-600 text-sm">
+                Created by
+                <a href="https://twitter.com/adevade" class="underline"
+                    >@adevade</a
+                >
+                | Got suggestions? Feel free to
+                <a
+                    href="https://github.com/adevade/color-scheme-generator"
+                    class="underline"
+                    >contribute in GitHub</a
+                >!
+            </footer>
         </div>
-    </section>
-
-    <section class="container mx-auto mb-12 px-4">
-        <span>Grays</span>
-
-        <div class="flex flex-wrap items-center justify-center md:flex-no-wrap overflow-hidden rounded">
-            <div
-                v-for="gray in grays"
-                :style="{ backgroundColor: gray.value.hex() }"
-                class="w-1/3 h-32 md:flex-1">
-            </div>
-        </div>
-    </section>
-
-    <section class="container mx-auto mb-12 px-4">
-        <div class="flex flex-wrap">
-            <span
-                v-for="tab in tabs"
-                class="cursor-pointer mr-2 px-2 py-1 rounded-t sm:px-4 sm:py-2 sm:text-base text-sm"
-                role="tab"
-                :class="{ 'bg-white': activeTab === tab.id }"
-                @click="setActiveTab(tab.id)"
-                v-text="tab.title"
-            ></span>
-        </div>
-
-        <div id="output" class="rounded-b rounded-tr bg-white pt-8 px-4 pb-4 leading-tight text-sm" :class="{ 'rounded-t': activeTab !== 'tailwind' }">
-            <!-- TAILWIND -->
-            <div v-if="activeTab === 'tailwind'" class="overflow-x-scroll">
-                <span v-for="(gray, id) in grays" class="whitespace-no-wrap">'{{ id }}': '{{ gray.value.hex() }}',<br></span><br>
-
-                <span v-for="(color, id) in colors" class="whitespace-no-wrap">
-                    '{{ id }}-light': '{{ tint(color.value).hex() }}',<br>
-                    '{{ id }}': '{{ color.value.hex() }}',<br>
-                    '{{ id }}-dark': '{{ shade(color.value).hex() }}',<br><br>
-                </span>
-            </div>
-
-            <!-- SASS -->
-            <div v-if="activeTab === 'sass'" class="overflow-x-scroll">
-                <span v-for="(gray, id) in grays" class="whitespace-no-wrap">${{ id }}: {{ gray.value.hex() }}<br></span><br>
-
-                <span v-for="(color, id) in colors" class="whitespace-no-wrap">
-                    ${{ id }}-light: {{ tint(color.value).hex() }}<br>
-                    ${{ id }}: {{ color.value.hex() }}<br>
-                    ${{ id }}-dark: {{ shade(color.value).hex() }}<br><br>
-                </span>
-            </div>
-
-            <!-- SCSS -->
-            <div v-if="activeTab === 'scss'" class="overflow-x-scroll">
-                <span v-for="(gray, id) in grays" class="whitespace-no-wrap">${{ id }}: {{ gray.value.hex() }};<br></span><br>
-
-                <span v-for="(color, id) in colors" class="whitespace-no-wrap">
-                    ${{ id }}-light: {{ tint(color.value).hex() }};<br>
-                    ${{ id }}: {{ color.value.hex() }};<br>
-                    ${{ id }}-dark: {{ shade(color.value).hex() }};<br><br>
-                </span>
-            </div>
-
-            <!-- LESS -->
-            <div v-if="activeTab === 'less'" class="overflow-x-scroll">
-                <span v-for="(gray, id) in grays" class="whitespace-no-wrap">@{{ id }}: {{ gray.value.hex() }};<br></span><br>
-
-                <span v-for="(color, id) in colors" class="whitespace-no-wrap">
-                    @{{ id }}-light: {{ tint(color.value).hex() }};<br>
-                    @{{ id }}: {{ color.value.hex() }};<br>
-                    @{{ id }}-dark: {{ shade(color.value).hex() }};<br><br>
-                </span>
-            </div>
-        </div>
-    </section>
-
-    <footer class="mb-12 px-3 text-center text-gray-600 text-sm">
-        Created by
-        <a href="https://twitter.com/adevade" class="underline">@adevade</a>
-        | Got suggestions? Feel free to
-        <a href="https://github.com/adevade/color-scheme-generator" class="underline">contribute in GitHub</a>!
-    </footer>
-</div>
-
-</body>
+    </body>
 </html>
