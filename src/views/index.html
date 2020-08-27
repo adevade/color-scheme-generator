@@ -21,14 +21,14 @@
                         type="text"
                         autocomplete="off"
                         autofocus
-                        class="flex-1 px-4 py-2 text-2xl rounded-l"
+                        class="flex-1 px-4 py-2 text-2xl leading-8 border border-white rounded-l focus:border-gray-500 focus:outline-none"
                         :placeholder="brand"
                         v-model="colorInputValue"
                     />
 
                     <button
                         type="button"
-                        class="px-5 bg-gray-100 rounded-r"
+                        class="inline-flex items-center justify-center w-12 bg-gray-100 border border-gray-100 rounded-r focus:border-gray-500 focus:outline-none"
                         title="Randomize"
                         @click="colorInputValue = getRandomColor()"
                     >
