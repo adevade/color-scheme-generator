@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="en" class="bg-gray-200 font-mono text-gray-800">
+<html lang="en" class="font-mono text-gray-800 bg-gray-200">
     <head>
         <meta charset="utf-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -13,11 +13,11 @@
     </head>
     <body>
         <div id="app">
-            <h1 class="leading-tight my-12 px-4 text-4xl text-center">
+            <h1 class="px-4 my-12 text-4xl leading-tight text-center">
                 Color Scheme Generator
             </h1>
 
-            <label class="block max-w-lg mx-auto mb-12 px-4">
+            <label class="block max-w-lg px-4 mx-auto mb-12">
                 <span class="text-lg">Brand Color</span>
 
                 <div class="flex">
@@ -25,14 +25,14 @@
                         type="text"
                         autocomplete="off"
                         autofocus
-                        class="flex-1 px-4 py-2 rounded-l text-2xl"
+                        class="flex-1 px-4 py-2 text-2xl rounded-l"
                         :placeholder="brand"
                         v-model="colorInputValue"
                     />
 
                     <button
                         type="button"
-                        class="bg-gray-100 px-5 rounded-r"
+                        class="px-5 bg-gray-100 rounded-r"
                         title="Randomize"
                         @click="colorInputValue = getRandomColor()"
                     >
@@ -41,13 +41,13 @@
                 </div>
             </label>
 
-            <section class="container mx-auto mb-12 px-4">
+            <section class="container px-4 mx-auto mb-12">
                 <div
-                    class="-mx-4 flex flex-wrap items-start justify-between md:flex-no-wrap"
+                    class="flex flex-wrap items-start justify-between -mx-4 md:flex-no-wrap"
                 >
                     <div
                         v-for="color in colors"
-                        class="md:1/6 p-4 sm:w-1/3 w-1/2"
+                        class="w-1/2 p-4 md:1/6 sm:w-1/3"
                     >
                         <span v-text="color.name"></span>
 
@@ -69,11 +69,11 @@
                 </div>
             </section>
 
-            <section class="container mx-auto mb-12 px-4">
+            <section class="container px-4 mx-auto mb-12">
                 <span>Grays</span>
 
                 <div
-                    class="flex flex-wrap items-center justify-center md:flex-no-wrap overflow-hidden rounded"
+                    class="flex flex-wrap items-center justify-center overflow-hidden rounded md:flex-no-wrap"
                 >
                     <div
                         v-for="gray in grays"
@@ -83,11 +83,11 @@
                 </div>
             </section>
 
-            <section class="container mx-auto mb-12 px-4">
+            <section class="container px-4 mx-auto mb-12">
                 <div class="flex flex-wrap">
                     <span
                         v-for="tab in tabs"
-                        class="cursor-pointer mr-2 px-2 py-1 rounded-t sm:px-4 sm:py-2 sm:text-base text-sm"
+                        class="px-2 py-1 mr-2 text-sm rounded-t cursor-pointer sm:px-4 sm:py-2 sm:text-base"
                         role="tab"
                         :class="{ 'bg-white': activeTab === tab.id }"
                         @click="setActiveTab(tab.id)"
@@ -97,7 +97,7 @@
 
                 <div
                     id="output"
-                    class="rounded-b rounded-tr bg-white pt-8 px-4 pb-4 leading-tight text-sm"
+                    class="px-4 pt-8 pb-4 text-sm leading-tight bg-white rounded-b rounded-tr"
                     :class="{ 'rounded-t': activeTab !== 'tailwind' }"
                 >
                     <!-- TAILWIND -->
@@ -179,7 +179,7 @@
                 </div>
             </section>
 
-            <footer class="mb-12 px-3 text-center text-gray-600 text-sm">
+            <footer class="px-3 mb-12 text-sm text-center text-gray-600">
                 Created by
                 <a href="https://twitter.com/adevade" class="underline"
                     >@adevade</a
@@ -188,7 +188,7 @@
                 <a
                     href="https://github.com/adevade/color-scheme-generator"
                     class="underline"
-                    >contribute in GitHub</a
+                    >contribute on GitHub</a
                 >!
             </footer>
         </div>
