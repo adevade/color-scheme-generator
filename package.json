@@ -11,9 +11,9 @@
     "autoprefixer": "^9.8.6",
     "chroma-js": "^2.1.0",
     "cross-env": "^7.0.2",
-    "laravel-mix": "^5.0.5",
-    "prettier": "^2.1.1",
-    "tailwindcss": "^1.7.5",
+    "laravel-mix": "^5.0.9",
+    "prettier": "^2.1.2",
+    "tailwindcss": "^1.9.6",
     "vue": "^2.6.12",
     "vue-template-compiler": "^2.6.12"
   }
