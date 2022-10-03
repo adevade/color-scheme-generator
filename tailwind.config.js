@@ -1,9 +1,19 @@
+const colors = require('tailwindcss/colors');
+
 module.exports = {
-  purge: ["./src/**/*.html", "./src/**/*.js"],
-  future: {
-    defaultLineHeights: true,
-    purgeLayersByDefault: true,
-    removeDeprecatedGapUtilities: true,
-    standardFontWeights: true,
+  content: ['./src/**/*.{html,js}'],
+  theme: {
+    screens: {
+      'sm': '640px',
+      'md': '768px',
+      'lg': '1024px',
+      'xl': '1280px',
+    },
+    extend: {
+      colors: {
+        gray: colors.slate,
+      },
+    },
   },
+  plugins: [],
 };
