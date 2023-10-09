@@ -4,6 +4,8 @@
 
 ## Usage
 
+Go to [adevade.github.io/color-scheme-generator](https://adevade.github.io/color-scheme-generator).
+
 Enter a brand color, or randomly generate one, and the rest of the colors will match. The grays also subtly tints with your brand color.
 
 The input accepts most color formats, for example:
